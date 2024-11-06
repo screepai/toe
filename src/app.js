@@ -27,7 +27,10 @@ io.on("connection", (socket) => {
       if (room && room.players.length < 2) {
          room.players.push(socket.id);
          socket.join(roomId);
-         socket.emit("gameJoined", "O");
+         socket.emit("gameJoined", {
+            mark: "O",
+            roomId
+         });
          socket.to(roomId).emit("opponentJoined");
          return;
       }

@@ -38,7 +38,7 @@ let dragStart = { x: 0, y: 0 };
 const MIN_SCALE = 0.1;
 const MAX_SCALE = 5;
 const ZOOM_SPEED = 0.1;
-const STRIKE_COLOR = "#000000";
+const STRIKE_COLOR = "#1c1c1c";
 const STRIKE_WIDTH = 5;
 const STRIKE_ANIMATION_DURATION = 150;
 const FRICTION = 0.85;
@@ -134,7 +134,13 @@ function drawGrid() {
       const endX = (endCell[0] * cellSize) + (cellSize / 2);
       const endY = (endCell[1] * cellSize) + (cellSize / 2);
 
-      graphics.lineStyle(STRIKE_WIDTH, STRIKE_COLOR, 1);
+      graphics.lineStyle({
+         width: STRIKE_WIDTH,
+         color: STRIKE_COLOR,
+         cap: "round",
+         join: "round",
+         alpha: 1
+      });
       graphics.moveTo(startX, startY);
       graphics.lineTo(endX, endY);
    }
@@ -247,10 +253,7 @@ function placeMark(cellX, cellY) {
    const coordKey = `${cellX},${cellY}`;
 
    if (gameState.gameMode === "multi") {
-      if (!gameState.isMyTurn) {
-         console.log("Not your turn!");
-         return;
-      }
+      if (!gameState.isMyTurn) return;
       if (placedMarks.has(coordKey)) return;
 
       socket.emit("placeMark", { roomId: gameState.roomId, cellX, cellY });
@@ -300,8 +303,10 @@ function placeMark(cellX, cellY) {
       return;
    }
 
-   gameState.currentPlayer = gameState.currentPlayer === "X" ? "O" : "X";
-   document.getElementById("gameStatus").textContent = `${gameState.currentPlayer}'s Turn`;
+   if (gameState.gameMode === "single") {
+      gameState.currentPlayer = gameState.currentPlayer === "X" ? "O" : "X";
+      document.getElementById("gameStatus").textContent = `${gameState.currentPlayer}'s Turn`;
+   }
 }
 
 function checkWin(cellX, cellY, player) {
@@ -393,7 +398,13 @@ function animateWinningLine(cells) {
       progress = Math.min(progress, 1);
 
       graphics.clear();
-      graphics.lineStyle(STRIKE_WIDTH, STRIKE_COLOR, 1);
+      graphics.lineStyle({
+         width: STRIKE_WIDTH,
+         color: STRIKE_COLOR,
+         cap: "round",
+         join: "round",
+         alpha: 1
+      });
       graphics.moveTo(startX, startY);
       graphics.lineTo(
          startX + (endX - startX) * progress,

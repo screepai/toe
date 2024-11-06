@@ -53,7 +53,8 @@ io.on("connection", (socket) => {
       io.in(roomId).emit("markPlaced", {
          cellX,
          cellY,
-         player: currentPlayerMark
+         player: currentPlayerMark,
+         nextPlayer: room.currentPlayer
       });
    });
 

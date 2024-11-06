@@ -30,11 +30,9 @@ socket.on("opponentJoined", () => {
    document.getElementById("gameStatus").textContent = gameState.isMyTurn ? "Your turn" : "Opponent's turn";
 });
 
-socket.on("markPlaced", ({ cellX, cellY, player }) => {
+socket.on("markPlaced", ({ cellX, cellY, player, nextPlayer }) => {
    const coordKey = `${cellX},${cellY}`;
    if (placedMarks.has(coordKey)) return;
-
-   velocity = { x: 0, y: 0 };
 
    const text = new PIXI.Text(player, {
       fontSize: 40,
@@ -55,8 +53,8 @@ socket.on("markPlaced", ({ cellX, cellY, player }) => {
    placedMarks.set(coordKey, { player, text });
    cameraAdjustment(cellX, cellY);
 
-   gameState.isMyTurn = player !== gameState.playerMark;
-   document.getElementById("gameStatus").textContent =
+   gameState.isMyTurn = nextPlayer === gameState.playerMark;
+   document.getElementById("gameStatus").textContent = 
       gameState.isMyTurn ? "Your turn" : "Opponent's turn";
 });
 

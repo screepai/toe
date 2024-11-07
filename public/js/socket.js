@@ -31,7 +31,7 @@ socket.on("gameJoined", (data) => {
    gameState.isMyTurn = gameState.playerMark === "X";
 
    document.getElementById("menuOverlay").style.display = "none";
-   document.getElementById("gameStatus").textContent = gameState.isMyTurn ? "Your turn" : "Opponents turn";
+   document.getElementById("gameStatus").textContent = gameState.isMyTurn ? "Your turn" : "Opponent's turn";
 
    // console.log("Game joined:", {
    //    mark: gameState.playerMark,
@@ -41,7 +41,7 @@ socket.on("gameJoined", (data) => {
 });
 
 socket.on("opponentJoined", () => {
-   document.getElementById("gameStatus").textContent = gameState.isMyTurn ? "Your turn" : "Opponents turn";
+   document.getElementById("gameStatus").textContent = gameState.isMyTurn ? "Your turn" : "Opponent's turn";
    // console.log("Opponent joined, interactive properties set");
 });
 

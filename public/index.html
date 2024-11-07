@@ -10,16 +10,23 @@
 <body>
    <div id="statusBar">
       <span id="gameStatus">X's Turn</span>
-      <button id="restartButton" onclick="restartGame()">Restart</button>
+      <button id="restartButton" onclick="requestRematch()">Rematch</button>
    </div>
    <div id="menuOverlay">
       <div id="menuContent">
-         <button id="singlePlayerBtn">Single Player</button>
+         <button id="singlePlayerBtn">Singleplayer</button>
          <button id="createGameBtn">Create Multiplayer Game</button>
          <div id="joinGame">
             <input type="text" id="roomIdInput" placeholder="Enter Room ID">
             <button id="joinGameBtn">Join Game</button>
          </div>
+      </div>
+   </div>
+   <div id="rematchPopup" style="display: none;">
+      <div class="popup-content">
+         <p>Opponent wants a rematch!</p>
+         <button onclick="acceptRematch()">Accept</button>
+         <button onclick="declineRematch()">Decline</button>
       </div>
    </div>
    <script src="/socket.io/socket.io.js"></script>

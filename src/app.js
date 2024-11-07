@@ -8,8 +8,6 @@ app.use(express.static("public"));
 const rooms = new Map();
 
 io.on("connection", (socket) => {
-   console.log("User connected");
-
    socket.on("createRoom", () => {
       const roomId = Math.random().toString(36).substring(2, 8);
       rooms.set(roomId, {
@@ -71,7 +69,7 @@ io.on("connection", (socket) => {
    });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 http.listen(PORT, () => {
    console.log(`Server running on port ${PORT}`);
 });

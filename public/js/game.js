@@ -1,7 +1,7 @@
 const app = new PIXI.Application({
    width: window.innerWidth,
    height: window.innerHeight,
-   backgroundColor: "#f4f3f2",
+   backgroundColor: "#FEF9F2",
    resizeTo: window,
    autoDensity: true,
    resolution: window.devicePixelRatio || 1
@@ -36,9 +36,9 @@ let lastDragTime = 0;
 let dragStart = { x: 0, y: 0 };
 
 const MIN_SCALE = 0.1;
-const MAX_SCALE = 5;
+const MAX_SCALE = 6;
 const ZOOM_SPEED = 0.1;
-const STRIKE_COLOR = "#1c1c1c";
+const STRIKE_COLOR = "#52575D";
 const STRIKE_WIDTH = 5;
 const STRIKE_ANIMATION_DURATION = 150;
 const FRICTION = 0.85;
@@ -105,7 +105,7 @@ function drawGrid() {
    }
 
    const graphics = new PIXI.Graphics();
-   graphics.lineStyle(1 / scale, "#1e1c1c", 1);
+   graphics.lineStyle(1 / scale, "#41444B", 1);
 
    const startX = Math.floor(-gridContainer.x / (cellSize * scale)) - 20;
    const startY = Math.floor(-gridContainer.y / (cellSize * scale)) - 20;
